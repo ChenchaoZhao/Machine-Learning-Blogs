@@ -42,7 +42,7 @@ $$
 P(X, \Theta, Z) = P(Z) P(\Theta| Z) P(X|\Theta)
 $$
 
-where $P(X|\Theta)$ is known as the likelihood or chance of observing $X$ given model parameter $\Theta$; $P(\Theta|Z)$ is a prior of the likelihood; $P(Z)$ is the prior for the $P(\Theta|Z)$. The posterior is the degree of belief of the "invisible" random variables given observations
+where $$P(X|\Theta)$$ is known as the likelihood or chance of observing $$X$$ given model parameter $$\Theta$$; $$P(\Theta|Z)$$ is a prior of the likelihood; $$P(Z)$$ is the prior for the $$P(\Theta|Z)$$. The posterior is the degree of belief of the "invisible" random variables given observations
 
 $$
 P(\Theta, Z| X) \propto P(Z) P(\Theta|Z) P(X|\Theta)
@@ -52,19 +52,19 @@ up to a constant denominator of total evidence.
 
 ### Connect the dots
 
-A Bayesian network is graphical model where the "graph" is a DAG where the nodes represent random variables and arrows indicate causal relations between the random variables. The parameters of a BN include the DAG $G$ and model parameters $\Theta$. The joint density can be expanded as follows
+A Bayesian network is graphical model where the "graph" is a DAG where the nodes represent random variables and arrows indicate causal relations between the random variables. The parameters of a BN include the DAG $$G$$ and model parameters $$\Theta$$. The joint density can be expanded as follows
 
 $$
 P(\Theta, G, X) = P(G)P(\Theta|G)P(X|\Theta, G).
 $$
 
-However, the space of DAG is discrete and exponentially large. Thus, it is challenging to learn the DAG using gradient descent. Thus, the authors introduced a continuous latent variable $Z$ i.e. graph embedding, as the parent variable of graph $G$. Now the joint density becomes
+However, the space of DAG is discrete and exponentially large. Thus, it is challenging to learn the DAG using gradient descent. Thus, the authors introduced a continuous latent variable $$Z$$ i.e. graph embedding, as the parent variable of graph $$G$$. Now the joint density becomes
 
 $$
 P(\Theta, Z, G, X) = P(Z)P(G|Z)P(\Theta|G)P(X|\Theta, G)
 $$
 
-For a simple case where $P(X|G)$ can be computed directly, the posterior can be computed using
+For a simple case where $$P(X|G)$$ can be computed directly, the posterior can be computed using
 
 $$
 P(Z|X) \propto P(Z, X) = \sum_G P(X|G)P(G|Z)P(Z) = P(Z)\,\mathbb E_{P(G|Z)}P(X|G)
@@ -76,7 +76,7 @@ $$
 \log p(Z|X) = \log p(Z) + \log \mathbb{E}_{p(G|Z)}p(X|G) + {\rm const.}
 $$
 
-In general, $Z$ and $\Theta$ are learned jointly,
+In general, $$Z$$ and $$\Theta$$ are learned jointly,
 
 $$
 P(Z,\Theta|X) \propto P(Z,\Theta,X) = P(Z) \sum_G P(G|Z) P(\Theta|G) P(X|G,\Theta)
@@ -90,7 +90,7 @@ $$
 
 ### Stein Variational Inference
 
-In order to learn the latent variable $Z$ and model parameter $\Theta$ using gradient descent, one need to minimize the KL-divergence between the posterior and a tractable ansatz distribution. Instead of taking the parametric approach e.g. the mean-field exponential family ansatz, the authors chose a non-parametric kernel-based ansatz which is very similar to particle filter and kernel density estimators and is able to approximate generic distributions given sufficient number of particles. The algorithm is known as Stein gradient descent. Its awesomeness deserves another blog post to elaborate.
+In order to learn the latent variable $$Z$$ and model parameter $$\Theta$$ using gradient descent, one need to minimize the KL-divergence between the posterior and a tractable ansatz distribution. Instead of taking the parametric approach e.g. the mean-field exponential family ansatz, the authors chose a non-parametric kernel-based ansatz which is very similar to particle filter and kernel density estimators and is able to approximate generic distributions given sufficient number of particles. The algorithm is known as Stein gradient descent. Its awesomeness deserves another blog post to elaborate.
 
 ## Conclusions
 
