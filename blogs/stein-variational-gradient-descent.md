@@ -26,7 +26,6 @@ Let $$\{f_\mu\}_{\mu=1}^d$$ and $$\{g_\nu\}_{\nu=1}^d$$ be functions in RKHS $$\
 
 $$
 \langle \mathbf f, \mathbf g \rangle_{\mathcal H^d} = \delta_{\mu\nu}\langle f_\mu, g_\nu \rangle_{\mathcal H^d}.
-
 $$
 
 ## Stein identity and discrepancy
@@ -100,7 +99,7 @@ $$
 
 where for simplicity we assume $$x \in \mathbb R^d$$.
 
-The task of seeking such a transformation is equivalent to searching for a proper velocity field $v(x)$. 
+The task of seeking such a transformation is equivalent to searching for a proper velocity field $$v(x)$$. 
 
 The total mass of $$q$$ is conserved and we have a conserved current of $$q
 $$-charge
