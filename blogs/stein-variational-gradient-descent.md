@@ -101,8 +101,7 @@ where for simplicity we assume $$x \in \mathbb R^d$$.
 
 The task of seeking such a transformation is equivalent to searching for a proper velocity field $$v(x)$$. 
 
-The total mass of $$q$$ is conserved and we have a conserved current of $$q
-$$-charge
+The total mass of $$q$$ is conserved and we have a conserved current of $$q$$-charge
 
 $$
 j_q^\mu (x) = q(x) v^\mu(x)
