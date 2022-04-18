@@ -8,3 +8,5 @@
 * [Vanilla Kalman Filter](blogs/untitled.md)
 * [Support Vector Machine](blogs/support-vector-machine.md)
 * [One Class SVM](blogs/one-class-svm.md)
+* [Differentiable Bayesian Structure Learning](blogs/differentiable-bayesian-structure-learning.md)
+* [Stein Variational Gradient Descent](blogs/stein-variational-gradient-descent.md)
