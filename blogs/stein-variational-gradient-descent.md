@@ -49,7 +49,7 @@ $$
 = \mathbb E_p \left[ f\,  \mathrm d \log p + \mathrm d f \right] = 0
 $$
 
-for any test function $f$ that satisfies the requirements. Now we replace the sampling distribution by $$q$$ 
+for any test function $$f$$ that satisfies the requirements. Now we replace the sampling distribution by $$q$$ 
 
 $$
 \mathbb E_p [f \mathrm d\log p + \mathrm d f] \rightarrow \mathbb E_q [f \mathrm d\log p + \mathrm d f]\equiv S_{q,p}f
