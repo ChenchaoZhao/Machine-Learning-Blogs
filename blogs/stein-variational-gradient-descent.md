@@ -14,7 +14,7 @@ In our previous blog post *Differentiable Bayesian Structure Learning*, we brief
 
 ## Notations
 
-The usual inner product of two functions $f$ and $g$ is defined as
+The usual inner product of two functions $$f$$ and $$g$$ is defined as
 
 $$
 \langle f, g \rangle = \int dx \; f(x)g(x)
