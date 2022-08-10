@@ -275,7 +275,7 @@ where $${\bf z}({\bf x}_t, t)$$ is the model output.
 It can also be shown that
 
 $$
-L_0 = \frac{\beta_1}{2\alpha_1\sigma_t^2} \Vert {\bf z}_1 -{\bf z}({\bf x}_0,1)\Vert^2
+L_0 = \frac{\beta_1}{2\alpha_1\sigma_1^2} \Vert {\bf z}_1 -{\bf z}({\bf x}_0,1)\Vert^2
 $$
 
 where $$\bar \alpha_1 = \alpha_1 = 1 -\beta_1$$.
