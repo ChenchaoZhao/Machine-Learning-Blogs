@@ -309,19 +309,19 @@ where $${\bf z} \sim \mathcal N({\bf 0}, {\bf 1})$$.
 **Training**
 
 * Sample
-  * ${\bf x}\_0 \sim q\_0$
-  * $t \sim {\sf Uniform}(1,\cdots,T)$
-  * ${\bf z}\_t \sim \mathcal N({\bf 0}, {\bf 1})$
-* Construct ${\bf x}\_t$
-* Feed ${\bf x}\_t, t$ to model
-* Minimize $L\_{t-1}$
+  * $${\bf x}_0 \sim q_0$$
+  * $$t \sim {\sf Uniform}(1,\cdots,T)$$
+  * $${\bf z}_t \sim \mathcal N({\bf 0}, {\bf 1})$$
+* Construct $${\bf x}_t$$
+* Feed $${\bf x}_t, t$$ to model
+* Minimize $$L_{t-1}$$
 
 **Inference**
 
-* Sample $x\_T \sim \mathcal N({\bf 0}, {\bf 1})$
-* Loop $t = T,\cdots, 1$
-  * Sample ${\bf z} \sim \mathcal N({\bf 0}, {\bf 1})$
-  * Compute ${\bf x}\_{t-1}$
-* Return ${\bf x}\_0$
+* Sample $$x_T \sim \mathcal N({\bf 0}, {\bf 1})$$
+* Loop $$t = T,\cdots, 1$$
+  * Sample $${\bf z} \sim \mathcal N({\bf 0}, {\bf 1})$$
+  * Compute $${\bf x}_{t-1}$$
+* Return $${\bf x}_0$$
 
 The reconstruction formula is given in previous section "sampling the backward process."
