@@ -239,10 +239,6 @@ $$\mu_t=\mu_t({\bf x}_t, t)$$.
 Recall the objective for each time step 
 
 $$
-1<t<T
-$$
-
-$$
 D_{t-1} = D_{\rm KL}(q_{t-1|t,0}|p_{t-1|t,0}) = \frac{1}{2\sigma^2_t} \Vert \mu_t - \tilde \mu_t \Vert^2 + {\rm const.}
 $$
 
