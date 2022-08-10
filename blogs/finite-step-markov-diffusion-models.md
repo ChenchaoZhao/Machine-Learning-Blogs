@@ -1,20 +1,20 @@
 # Finite Step Markov Diffusion Models
 
-Let $$p( \cdot | \theta )$$ be the parametric model that models data $$x_0 \sim q_0$$, then we can optimize $\theta$ by maximize the likelihood $$p(x_0 | \theta)$$ or equivalently
+Let $$p( \cdot | \theta )$$ be the parametric model that models data $$x_0 \sim q_0$$, then we can optimize $$\theta$$ by maximize the likelihood $$p(x_0 | \theta)$$ or equivalently
 
 $$
 \max_\theta \mathbb E_{x_0 \sim q_0} \log p(x_0|\theta).
 $$
 
-From now on, we use $$q$$'s to denote the forward physical distributions and $p$'s the backward variational ansatz. The parameters are implied in $p(\cdot|\theta) \equiv p(\cdot)$.
+From now on, we use $$q$$'s to denote the forward physical distributions and $$p$$'s the backward variational ansatz. The parameters are implied in $$p(\cdot|\theta) \equiv p(\cdot)$$.
 
-Let $T > 1$ be the diffusion steps, the joint density of forward process $$q(x_{0, 1, \cdots T})$$ can be expanded sequentially if the process is Markov
+Let $$T > 1$$ be the diffusion steps, the joint density of forward process $$q(x_{0, 1, \cdots T})$$ can be expanded sequentially if the process is Markov
 
 $$
 q(x_0, x_1, \cdots, x_T) = q_0(x_0) \prod_{t=1}^T q_{t|t-1}(x_t|x_{t-1}).
 $$
 
-The reverse process variational ansatz can be similarly constructed
+The reverse process variational Ansatz can be similarly constructed
 
 $$
 p(x_0,x_1, \cdots, x_T) = p_T(x_T) \prod_{t=1}^T p_{t-1|t}(x_{t-1}|x_{t})
@@ -30,7 +30,7 @@ $$
 
 ### MLE and variational approach
 
-We will derive the lower bound of maximum likelihood objective $\mathbb E_{x_0 \sim q_0} \log p(x_0)$ and then show that it is related to a KL-divergence up to a constant.
+We will derive the lower bound of maximum likelihood objective $$\mathbb E_{x_0 \sim q_0} \log p(x_0)$$ and then show that it is related to a KL-divergence up to a constant.
 
 _Proof._ The original approach would expand the $$p$$ joint density
 
@@ -68,7 +68,7 @@ $$
 L_{\rm ELBO} = - H[q_0] - D_{\rm KL} (q_{0,\cdots,T}|p_{0,\cdots,T}).
 $$
 
-The entropy $$H\[q_0]$$ depends on data distribution and does not contain model parameters. Thus, maximizing log-likelihood lower bound $$L_{\rm ELBO}$$ is equivalent to minimizing KL-divergence between forward process joint density and backward process joint density.
+The entropy $$H[q_0]$$ depends on data distribution and does not contain model parameters. Thus, maximizing log-likelihood lower bound $$L_{\rm ELBO}$$ is equivalent to minimizing KL-divergence between forward process joint density and backward process joint density.
 
 > Regardless of Markov property of the processes, max likelihood lower bound is equivalent to min KL-divergence between variational Ansatz and physical forward process.
 
@@ -92,8 +92,7 @@ $$
 q_{t-1|t} \propto q_{t|t-1} q_{t-1};
 $$
 
-however, without the knowledge of the initial state $$x_0$$, there could be infinity possibilities. Therefore, we fix the initial state, and get probabilities given the fixed
-$$x_0 \sim q_0$$
+however, without the knowledge of the initial state $$x_0$$, there could be infinity possibilities. Therefore, we fix the initial state, and get probabilies given the fixed $$x_0 \sim q_0$$
 
 $$
 q_{t-1|t, 0} \propto q_{t|t-1, 0} q_{t-1 | 0},
@@ -149,10 +148,7 @@ $$
 D_T = D_{\rm KL} (q_{T|0}|p_T).
 $$
 
-The last term $$D_T$$  is a constant with **fixed** distribution $$p_T$$.
-If add back the entropy term $$H[q_0]$$, the first term becomes the usual likelihood
-$$L_0 = D_0 + H[q_0] = -\log p_{0|1}$$
-and the total loss becomes a typical variational inference loss: the sum of data negative log-likelihood and a series of prior KL-divergence.
+The last term $$D_T$$ is a constant with **fixed** distribution $$p_T$$. If add back the entropy term $$H[q_0]$$, the first term becomes the usual likelihood $$L_0 = D_0 + H[q_0] = -\log p_{0|1}$$ and the total loss becomes a typical variational inference loss: the sum of data negative log-likelihood and a series of prior KL-divergence.
 
 > So far we have not assumed any specific distribution yet. The objective is purely based on the assumption of Markov property.
 
@@ -175,12 +171,14 @@ $$
 where $$0<\beta_t \le 1$$.
 
 It is useful to introduce additional notations:
+
 * $$\alpha_t \equiv 1 - \beta_t$$, and
 * $$\bar \alpha_t \equiv \prod_{t=1}^T \alpha_t$$.
 
 #### Reparameterization
 
 Let $${\bf z}\sim \mathcal N({\bf 0}, {\bf 1})$$, the forward process can be written as
+
 $$
 {\bf x}_t = \sqrt{1-\beta_t} {\bf x}_{t-1} + \sqrt{\beta_t} {\bf z} =\sqrt{\alpha_t} {\bf x}_{t-1} + \sqrt{\beta_t} {\bf z} .
 $$
@@ -188,13 +186,14 @@ $$
 Iteratively apply the formula, we get
 
 $$
-{\bf x}_t = \sqrt{\bar \alpha_t} {\bf x}_0 + \sqrt{1-\bar \alpha_t} {\bf z}.
+{\bf x}\_t = \sqrt{\bar \alpha_t} {\bf x}_0 + \sqrt{1-\bar \alpha_t} {\bf z}.
 $$
 
-> Thus, we can generate $${\bf x}_t$$ for **any** $t$ without actually do the iterative calculations.
-> There is a similar property for any Markov process, i.e. Feynman-Kac formula
+> Thus, we can generate $${\bf x}_t$$ for **any** $$t$$without actually do the iterative calculations. There is a similar property for any Markov process, i.e. Feynman-Kac formula
 
-#### Posterior is Gaussian We can compute the posterior of the physical process using
+#### Posterior is Gaussian&#x20;
+
+We can compute the posterior of the physical process using
 
 $$
 q_{t-1|t, 0} \propto q_{t|t-1, 0} q_{t-1 | 0}
@@ -208,20 +207,24 @@ $$
 
 where
 
+
+
 $$
-\tilde \mu_t = \frac{\sqrt\alpha_t (1 - \bar \alpha_{t-1}){\bf x}_t + \beta_t \sqrt{\bar \alpha_{t-1\}}{\bf x}_0}{1-\bar\alpha_t} ,
+\tilde \mu_t = \frac{\sqrt\alpha_t (1 - \bar \alpha_{t-1}){\bf x}_t + 
+\beta_t \sqrt{\bar \alpha_{t-1}}{\bf x}_0}{1-\bar\alpha_t}
 $$
 
 and
 
 $$
-\tilde \beta_t = \beta_t \frac{1-\bar\alpha_{t-1\}}{1-\alpha_t} .
+\tilde \beta_t = \beta_t \frac{1-\bar\alpha_{t-1}}{1-\alpha_t} .
 $$
 
 Express $${\bf x}_0$$ in terms of $${\bf x}_t$$ and noise, the mean simplies
 
 $$
-\tilde \mu_t ({\bf x}_t) = \alpha_t^{-\frac12 } \left( {\bf x}_t - \frac{\beta_t}{\sqrt{1-\bar \alpha_t\}} {\bf z} \right).
+\tilde \mu_t ({\bf x}_t) 
+= \alpha_t^{-\frac12 } \left( {\bf x}_t - \frac{\beta_t}{\sqrt{1-\bar \alpha_t}} {\bf z} \right).
 $$
 
 #### Variational Ansatz
@@ -234,15 +237,32 @@ $$
 
 where the model parameters are $$\mu_t$$ and $$\sigma_t$$. The variance will eventually contribute to learning rate; we will treat $$\sigma_t$$ as a hyperparameter instead of learning it from stochastic gradient descent. The only learnable parameter is then
 
-$$\mu_t=\mu_t({\bf x}_t, t)$$.
+$$
+D_{t-1} = D_{\rm KL}(q_{t-1|t,0}|p_{t-1|t,0}) 
+= \frac{1}{2\sigma^2_t} \Vert \mu_t - \tilde \mu_t \Vert^2 + {\rm const.}
+$$
 
-Recall the objective for each time step 
+$$
+\frac{\delta D_{t-1}[\mu_t]}{\delta \mu_t} = 0 \Rightarrow \mu_t = \tilde \mu_t,
+$$
+
+Recall the objective for each time step
+
+$$
+\mu_t ({\bf x}_t, t) 
+= \alpha_t^{-\frac12 } \left( {\bf x}_t 
+- \frac{\beta_t}{\sqrt{1-\bar \alpha_t}} {\bf z}_t \right)
+$$
 
 $$
 D_{t-1} = D_{\rm KL}(q_{t-1|t,0}|p_{t-1|t,0}) = \frac{1}{2\sigma^2_t} \Vert \mu_t - \tilde \mu_t \Vert^2 + {\rm const.}
 $$
 
-where we used the KL-divergence between two Gaussian distributions. Clearly, we have the exact solution
+$$
+\mu_t ({\bf x}_t, t) 
+= \alpha_t^{-\frac12 } \left( {\bf x}_t 
+- \frac{\beta_t}{\sqrt{1-\bar \alpha_t}} {\bf z}({\bf x}_t, t) \right).
+$$
 
 $$
 \frac{\delta D_{t-1}\[\mu_t]}{\delta \mu_t} = 0 \Rightarrow \mu_t = \tilde \mu_t,
@@ -251,26 +271,18 @@ $$
 and therefore,
 
 $$
-\mu_t ({\bf x}_t, t) = \alpha_t^{-\frac12 } \left( {\bf x}_t - \frac{\beta_t}{\sqrt{1-\bar \alpha_t\}} {\bf z}_t \right)
+D_{t-1} = \frac{\beta_t^2}{2\alpha_t(1-\bar\alpha_t)\sigma_t^2} \Vert {\bf z}_t -{\bf z}({\bf x}_t,t)\Vert^2
 $$
 
-where $${\bf z}_t\sim\mathcal N(0, {\bf 1})$$ is the noise that generated $${\bf x}_t$$ from $${\bf x}_0$$. Next, we reparameterize $$\mu_t$$ to separate the *explicit* dependency of $${\bf x}_t$$ and $$t$$ and let the model only focus on the *implicit* dependencies, i.e.
+where $${\bf z}_t\sim\mathcal N(0, {\bf 1})$$ is the noise that generated $${\bf x}_t$$ from $${\bf x}_0$$. Next, we reparameterize $$\mu_t$$ to separate the _explicit_ dependency of $${\bf x}_t$$ and $$t$$ and let the model only focus on the _implicit_ dependencies, i.e.
 
 $$
-\mu_t ({\bf x}_t, t) = \alpha_t^{-\frac12 } \left( {\bf x}_t - \frac{\beta_t}{\sqrt{1-\bar \alpha_t\}} {\bf z}({\bf x}_t, t) \right).
+L_0 = \frac{\beta_1}{2\alpha_1\sigma_t^2} \Vert {\bf z}\_1 -{\bf z}({\bf x}\_0,1)\Vert^2
 $$
 
 Finally, the objective becomes
 
-$$
-D_{t-1} = \frac{\beta_t^2}{2\alpha_t(1-\bar\alpha_t)\sigma_t^2} \Vert {\bf z}_t -{\bf z}({\bf x}_t,t)\Vert^2
-$$
-
 where $${\bf z}({\bf x}_t, t)$$ is the model output. It can also be shown that
-
-$$
-L_0 = \frac{\beta_1}{2\alpha_1\sigma_t^2} \Vert {\bf z}_1 -{\bf z}({\bf x}_0,1)\Vert^2
-$$
 
 where $$\bar \alpha_1 = \alpha_1 = 1 -\beta_1$$. Thus, the generic loss term for $$0 < t < T$$ is
 
@@ -278,7 +290,7 @@ $$
 L_{t-1} = \frac{\beta_t^2}{2\alpha_t(1-\bar\alpha_t)\sigma_t^2} \Vert {\bf z}_t -{\bf z}({\bf x}_t,t)\Vert^2.
 $$
 
-Note that we still have the freedom to choose $$\sigma_t$$ that controls the importance of each step. But in the literature, they usually take a *heuristic* approach by ignoring the weight factor keeping only the $$\ell_2$$ loss.
+Note that we still have the freedom to choose $$\sigma_t$$ that controls the importance of each step. But in the literature, they usually take a _heuristic_ approach by ignoring the weight factor keeping only the $$\ell_2$$ loss.
 
 #### Sampling the backward process
 
@@ -297,7 +309,9 @@ $$
 where $${\bf z} \sim \mathcal N({\bf 0}, {\bf 1})$$.
 
 #### Training and inference algorithms
-##### Training
+
+**Training**
+
 * Sample
   * $${\bf x}_0 \sim q_0$$
   * $$t \sim {\sf Uniform}(1,\cdots,T)$$
@@ -306,7 +320,8 @@ where $${\bf z} \sim \mathcal N({\bf 0}, {\bf 1})$$.
 * Feed $${\bf x}_t, t$$ to model
 * Minimize $$L_{t-1}$$
 
-##### Inference
+**Inference**
+
 * Sample $$x_T \sim \mathcal N({\bf 0}, {\bf 1})$$
 * Loop $$t = T,\cdots, 1$$
 * Sample $${\bf z} \sim \mathcal N({\bf 0}, {\bf 1})$$
